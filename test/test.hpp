@@ -99,7 +99,7 @@ void GivenList10El_whenIter12El_then0Return(){
 void GivenList10El_whenIter11El_then0Return(){
     TinyLinkedList<int> list;
     for (int i = 0; i<10; i++) list.append(i);
-    int res{};
+    int res{1};
     for(int i=0; i<11; i++){
         res = list.iter.loopNext();
     }
@@ -107,24 +107,52 @@ void GivenList10El_whenIter11El_then0Return(){
     assert(res==0); 
 }
 
+void GivenList10El_whenIndex0_return0(){
+    TinyLinkedList<int> list;
+    for (int i = 0; i<10; i++) list.append(i);
+    signed int res = list.index(0);
+    
+    assert(res == 0);
+}
+
+void GivenList10El_whenIndex5_return5(){
+    TinyLinkedList<int> list;
+    for (int i = 0; i<10; i++) list.append(i);
+    signed int res = list.index(5);
+    assert(res == 5);
+}
+
+void GivenList10El_whenRemove9_return9(){
+    TinyLinkedList<int> list;
+    for (int i = 0; i<10; i++) list.append(i);
+    int res = list.remove(9);
+    assert(res == 9);
+}
+
 void run_tests(){
     printf("\n\n===============\nTest Starting\n===============\n"); 
     unsigned long timeTaken = millis();
     GivenEmptyList_WhenSize_Return0();
-    printf("1");
+    printf(".");
     GivenEmptyListAndString_WhenAppend100_SizeReturn100();
-    printf("2");
+    printf(".");
     GiventListWithElements_WhenGet2_Return2();
-    printf("3");
+    printf(".");
     GiventListWithElements_WhenGet_Return();
-    printf("4");
+    printf(".");
     GiventListWithElements_WhenGetReverse_ReturnReverse();
-    printf("5");
+    printf(".");
     GivenListWith10Elements_WhenPopped_SizeReturn9();
-    printf("6");
+    printf(".");
     GivenListWith10Elements_WhenIter_10elementsCount();
-    printf("7");
+    printf(".");
+    GivenList10El_whenIndex0_return0();
+    printf(".");
     GivenList10El_whenIter11El_then0Return();
+    printf(".");
+    GivenList10El_whenIndex5_return5();
+    printf(".");
+    GivenList10El_whenRemove9_return9();
     printf("...Done\n");
     timeTaken = millis() - timeTaken;
     printf("\n==================\nTest End after: %lu ms\n==================\n", timeTaken);

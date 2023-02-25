@@ -39,6 +39,24 @@ class TinyLinkedList{
             _size++;
         };
 
+        signed int index(T element){
+            Node<T> *current{_root};
+            for(size_t idx=0; idx<=_size; idx++){
+                if (current->data == element){
+                    return idx;
+                }
+                current = current->next;
+            }
+            return -1;
+        };
+
+        T remove(size_t index){
+            Node<T> *pred = _get(index - 1);
+            Node<T> *res = pred->next;
+            pred->next = pred->next->next;
+            return res->data;
+        }
+
         T get(size_t index){
             return _get(index)->data;
         }
