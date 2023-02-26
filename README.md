@@ -7,14 +7,14 @@ It cannot be used for types which disallow copy constructor as elements are pass
 
 ## Features
 * Template class to use arbitrary types.
-* Minimalistic interface with only three methods.
+* Minimalistic interface with only five methods.
 * Iter protocol `while(list.iter()) el = list.iter.next()`
 * No over-allocating. Full memory management.
 * Pass-by-Value design. This means the list will take over ownership. 
 * Destructor will destroy every value.
 
 ## Disclaimer
-Uses C11 on ESP 8266. May not run with other arduino devices (not tested).
+Uses C++11. Was developed on a ESP8266. May run on any other machine as well. 
 
 ## Usage / Example
 ```c++
@@ -24,6 +24,7 @@ void main(){
     LinkedList<int> list{};
     list.append(1);
     list.append(2);
+    list.append(3);
 
     while(list.iter()){
         int i = list.iter.next();
@@ -32,6 +33,8 @@ void main(){
 
     int el = list.get(0);
     el = list.pop();
+    int idx = list.index(2);
+    el = list.remove(idx);
 
     while(1){
         el = list.iter.loopNext();
