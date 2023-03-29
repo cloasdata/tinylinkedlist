@@ -25,12 +25,12 @@ void GivenEmptyListAndString_WhenAppend100_SizeReturn100(){
 }
 
 void GivenListWithLargeData_WhenDestroyed_HeapDoesNotIncrease(){
-    uint16_t stackSize = ESP.getFreeHeap();
+    uint16_t heapSize = ESP.getFreeHeap();
     testData data;
     TinyLinkedList<testData> list;
     for (int i = 0; i<100; i++) list.append(data);
     list.~TinyLinkedList();
-    assert(stackSize - ESP.getFreeHeap() == 0);
+    assert(heapSize - ESP.getFreeHeap() == 0);
 }
 
 
@@ -88,7 +88,6 @@ void GivenListWith10Elements_WhenIter_10elementsCount(){
     while(list.iter()){
         sum+=list.iter.next();
     }
-    Serial.print(sum);
     assert(sum==10);
 }
 
@@ -150,7 +149,6 @@ void GivenList10El_whenRemove10andIter_ReturnSafe(){
     TinyLinkedList<int> list;
     for (int i = 0; i<10; i++) list.append(i);
     for (int i = 0; i<10; i++) list.pop();
-    Serial.print(list.size());
     while(list.iter()){
         int el = list.iter.next();
         assert(list.size()==0);
