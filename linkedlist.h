@@ -26,6 +26,7 @@ class TinyLinkedList{
         LoopingIterator<T> iter;
 
         void append(T v){
+            _size++;
             Node<T> *newNode = new Node<T>();
             newNode->data =v;
             if (_root){
@@ -36,7 +37,6 @@ class TinyLinkedList{
                 iter._reset();
             }
             _end = newNode;
-            _size++;
         };
 
         signed int index(T element){
@@ -72,9 +72,11 @@ class TinyLinkedList{
                 _size--;
             } else {
                 resData = _root->data;
+                delete(_root);
                 _root = nullptr;
                 _end = nullptr;
                 _size = 0;
+                iter._reset();
             }
             return resData;
         }
@@ -112,10 +114,11 @@ class LoopingIterator{
         LoopingIterator(TinyLinkedList<K> &instance)
            : _instance{instance}
         {};
+
         // once we iterated all elements we reset and return false.
         bool operator()(){
-            bool res = _iter;
-            if (not _iter) _reset();
+            bool res = _canIter;
+            if (not _canIter) _reset();
             return res;
         }
     
@@ -123,14 +126,17 @@ class LoopingIterator{
             K data = _next->data;
             _next = _next->next;
             if (not _next){
-               _iter = false;
+               _canIter = false;
             }
             return data;
         }
 
+        /*
+        Loops infentily. When end is reached it will start with zero element again
+        */
         K loopNext(){
             K data = next();
-            if (not _iter)
+            if (not _canIter)
                 _reset();
             return data;
         }
@@ -139,11 +145,16 @@ class LoopingIterator{
 
         TinyLinkedList<K> &_instance ;
         Node<K> *_next{nullptr};
-        bool _iter = true;
+        bool _canIter{false};
 
         void _reset(){
-            _next = _instance._root;
-            _iter = true;
+            if (_instance.size()){
+                _next = _instance._root;
+                _canIter = true;
+            } else {
+                _next = nullptr;
+                _canIter = false;
+            }
         }
 };
 
