@@ -145,6 +145,17 @@ void GivenEmptyList_WhenIter_ReturnSafe(){
     assert(list.size()==0);
 }
 
+void GivenListWith2El_WhenIterAndReset_ReturnFirstEl(){
+    TinyLinkedList<int> list;
+    list.append(42);
+    list.append(13);
+    
+    list.iter.next();
+    list.iter.reset();
+    auto el = list.iter.next();
+    assert(el==42);
+}
+
 void GivenList10El_whenRemove10andIter_ReturnSafe(){
     TinyLinkedList<int> list;
     for (int i = 0; i<10; i++) list.append(i);
@@ -186,6 +197,8 @@ void run_tinylinkedlist_tests(){
     GivenList10El_whenRemove9_return9();
     printf(".");
     GivenEmptyList_WhenIter_ReturnSafe();
+    printf(".");
+    GivenListWith2El_WhenIterAndReset_ReturnFirstEl();
     printf(".");
     GivenList10El_whenRemove10andIter_ReturnSafe();
     printf(".");

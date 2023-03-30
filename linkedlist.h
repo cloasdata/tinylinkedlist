@@ -141,6 +141,14 @@ class LoopingIterator{
             return data;
         }
 
+        /*
+        Resets the iterator and starts than from zero element again.
+        */
+       void reset(){
+        _reset();
+       }
+
+
     private:
 
         TinyLinkedList<K> &_instance ;
