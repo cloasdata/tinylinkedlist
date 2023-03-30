@@ -139,7 +139,7 @@ void GivenList10El_whenRemove9_return9(){
 void GivenEmptyList_WhenIter_ReturnSafe(){
     TinyLinkedList<int> list;
     while(list.iter()){
-        int el = list.iter.next();
+        list.iter.next();
         assert(false);
     }
     assert(list.size()==0);
@@ -150,7 +150,7 @@ void GivenList10El_whenRemove10andIter_ReturnSafe(){
     for (int i = 0; i<10; i++) list.append(i);
     for (int i = 0; i<10; i++) list.pop();
     while(list.iter()){
-        int el = list.iter.next();
+        list.iter.next();
         assert(list.size()==0);
         assert(false);
     }
