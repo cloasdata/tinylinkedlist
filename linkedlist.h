@@ -123,21 +123,25 @@ class LoopingIterator{
         }
     
         K next(){
-            K data = _next->data;
-            _next = _next->next;
-            if (not _next){
-               _canIter = false;
+            if (_instance.size()){
+                K data = _next->data;
+                _next = _next->next;
+                if (not _next){
+                    _canIter = false;
+                } 
+                return data;
+            } else {
+                return K();
             }
-            return data;
         }
 
         /*
         Loops infentily. When end is reached it will start with zero element again
         */
         K loopNext(){
-            K data = next();
             if (not _canIter)
                 _reset();
+            K data = next();
             return data;
         }
 
