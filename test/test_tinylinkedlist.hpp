@@ -114,6 +114,16 @@ void GivenList10El_whenIter11El_then0Return(){
     assert(res==0); 
 }
 
+void GivenList10El_WhenIter28times_Then8Return(){
+    TinyLinkedList<int> list;
+    for (int i = 0; i<10; i++) list.append(i);
+    int res{1};
+    for(int i=0; i<29; i++){
+        res = list.iter.loopNext();
+    }
+    assert(res==8); 
+}
+
 void GivenEmptyList_whenLoopNext_thenNoError(){
     TinyLinkedList<int> list;
     for (int i = 0; i<10; i++){
@@ -178,7 +188,6 @@ void GivenList10El_whenRemove10andIter_ReturnSafe(){
 void run_tinylinkedlist_tests(){
     printf("\n\n===============\nTest Starting\n===============\n"); 
     unsigned long timeTaken = millis();
-    GivenEmptyList_whenLoopNext_thenNoError();
     GivenEmptyList_WhenSize_Return0();
     printf(".");
     GivenEmptyListAndString_WhenAppend100_SizeReturn100();
@@ -209,6 +218,9 @@ void run_tinylinkedlist_tests(){
     printf(".");
     GivenList10El_whenRemove10andIter_ReturnSafe();
     printf(".");
+    GivenEmptyList_whenLoopNext_thenNoError();
+    printf(".");
+    GivenList10El_WhenIter28times_Then8Return();
     printf(".");
     printf("...Done\n");
     timeTaken = millis() - timeTaken;
