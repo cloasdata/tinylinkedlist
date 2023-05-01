@@ -131,7 +131,7 @@ class LoopingIterator{
                 } 
                 return data;
             } else {
-                return K();
+                return K{};
             }
         }
 
