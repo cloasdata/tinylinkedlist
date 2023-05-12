@@ -158,7 +158,10 @@ class LoopingIterator{
         TinyLinkedList<K> &_instance ;
         Node<K> *_next{nullptr};
         bool _canIter{false};
-
+        
+        /*
+        Resets the iterator back to the first element.
+        */
         void _reset(){
             if (_instance.size()){
                 _next = _instance._root;
