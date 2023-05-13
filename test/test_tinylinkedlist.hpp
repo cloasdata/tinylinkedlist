@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include <assert.h>
 
-#include "linkedlist.h"
+#include "../linkedlist.h"
 
 struct testData{
     char test[10] = "123456789";
@@ -185,6 +185,29 @@ void GivenList10El_whenRemove10andIter_ReturnSafe(){
     assert(list.size()==0);
 }
 
+void GivenList10El_whenPopLeft_ReturnEl0(){
+    TinyLinkedList<int> list;
+    for (int i = 0; i<10; i++) list.append(i);
+    int res = list.popLeft();
+    assert(res == 0);
+    assert(list.get(9)==9);
+}
+
+void GivenList10El_whenPopLeft10_ReturnSafe(){
+    TinyLinkedList<int> list;
+    for (int i = 0; i<10; i++) list.append(i);
+    for (int i = 0; i<10; i++) list.popLeft();
+    while(list.iter()){
+        list.iter.next();
+        assert(list.size()==0);
+        assert(false);
+    }
+    assert(list.size()==0);
+}
+
+
+
+
 void run_tinylinkedlist_tests(){
     printf("\n\n===============\nTest Starting\n===============\n"); 
     unsigned long timeTaken = millis();
@@ -222,7 +245,11 @@ void run_tinylinkedlist_tests(){
     printf(".");
     GivenList10El_WhenIter28times_Then8Return();
     printf(".");
-    printf("...Done\n");
+    GivenList10El_whenPopLeft_ReturnEl0();
+    printf(".");
+    GivenList10El_whenPopLeft10_ReturnSafe();
+    printf(".");
+    printf("\nDone\n");
     timeTaken = millis() - timeTaken;
     printf("\n==================\nTest End after: %lu ms\n==================\n", timeTaken);
 }

@@ -81,6 +81,22 @@ class TinyLinkedList{
             return resData;
         }
 
+        T popLeft(){
+            if (not _size) {
+
+                return T();
+            }
+            T resData{_root->data};
+            delete(_root);
+            _root = _root->next;
+            _size--;
+            if (!_root){
+                _end = nullptr;
+                iter._reset();
+            }
+            return resData;
+        }
+
         size_t size(){return _size;};
 
     private:
