@@ -92,8 +92,8 @@ class TinyLinkedList{
             _size--;
             if (!_root){
                 _end = nullptr;
-                iter._reset();
             }
+            iter._reset();
             return resData;
         }
 

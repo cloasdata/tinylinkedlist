@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include <assert.h>
 
-#include "../linkedlist.h"
+#include "../src/linkedlist.h"
 
 struct testData{
     char test[10] = "123456789";
@@ -185,12 +185,13 @@ void GivenList10El_whenRemove10andIter_ReturnSafe(){
     assert(list.size()==0);
 }
 
+
 void GivenList10El_whenPopLeft_ReturnEl0(){
     TinyLinkedList<int> list;
     for (int i = 0; i<10; i++) list.append(i);
     int res = list.popLeft();
     assert(res == 0);
-    assert(list.get(9)==9);
+    assert(list.get(8)==9);
 }
 
 void GivenList10El_whenPopLeft10_ReturnSafe(){
@@ -205,6 +206,20 @@ void GivenList10El_whenPopLeft10_ReturnSafe(){
     assert(list.size()==0);
 }
 
+
+void GivenList10El_whenPopLeft_Iter9(){
+    TinyLinkedList<int> list;
+    for (int i = 0; i<10; i++) list.append(i);
+    list.popLeft();
+    int res{};
+    int times{0};
+    while(list.iter()){
+        res = list.iter.next();
+        times++;
+    }
+    assert(res==9);
+    assert(times==9);
+}
 
 
 
@@ -249,7 +264,11 @@ void run_tinylinkedlist_tests(){
     printf(".");
     GivenList10El_whenPopLeft10_ReturnSafe();
     printf(".");
+    GivenList10El_whenPopLeft_Iter9();
+    printf(".");
     printf("\nDone\n");
     timeTaken = millis() - timeTaken;
     printf("\n==================\nTest End after: %lu ms\n==================\n", timeTaken);
+    delay(1000);
+    ESP.restart();
 }
